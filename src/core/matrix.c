@@ -2,6 +2,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ELEMENTWISE_OP(op) \
+    if(!a || !b || a->rows != b->rows || a->cols != b->cols) return NULL; \
+    Matrix* res = create_matrix(a->rows, a->cols); \
+    for(size_t i=0;i<a->rows;i++){ \
+        for(size_t j=0;j<a->cols;j++){ \
+            res->data[i][j] = a->data[i][j] op b->data[i][j]; \
+        } \
+    } \
+    return res;
+
+Matrix* elementwise_add(const Matrix* a, const Matrix* b){
+    ELEMENTWISE_OP(+)
+}
+
+Matrix* elementwise_subtract(const Matrix* a, const Matrix* b){
+    ELEMENTWISE_OP(-)
+}
+
+Matrix* elementwise_multiply(const Matrix* a, const Matrix* b){
+    ELEMENTWISE_OP(*)
+}
+
+Matrix* elementwise_divide(const Matrix* a, const Matrix* b){
+    ELEMENTWISE_OP(/)
+}
+
 Matrix* create_matrix(size_t row, size_t cols){
     //allocate memory for matrix strucutre
     Matrix* m = (Matrix*)malloc(sizeof(Matrix));
@@ -84,6 +110,15 @@ Matrix* transpose_matrix(const Matrix* m){
             t->data[j][i] = m->data[i][j];
         }
     }
-
     return t;
+}
+
+double dot_product(const double* a, const double *b, size_t n){
+    if(!a||!b) return 0.0;
+
+    double sum = 0.0;
+    for(size_t i=0;i<n;i++){
+        sum += a[i]*b[i];
+    }
+    return sum;
 }

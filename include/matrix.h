@@ -15,5 +15,13 @@ void print_matrix(const Matrix* matrix);
 Matrix* add_matrices(const Matrix* a, const Matrix* b);
 Matrix* multiply_matrices(const Matrix* a, const Matrix* b);
 Matrix* transpose_matrix(const Matrix* m);
+double dot_product(const double* a, const double* b, size_t n);
+
+Matrix* elementwise_add(const Matrix* a, const Matrix* b);
+Matrix* elementwise_subtract(const Matrix* a, const Matrix* b);
+Matrix* elementwise_multiply(const Matrix* a, const Matrix* b);
+Matrix* elementwise_divide(const Matrix* a, const Matrix* b);
+
+
 
 #endif
