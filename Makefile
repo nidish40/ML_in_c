@@ -8,9 +8,9 @@ OBJ = $(SRC:.c=.o)
 TARGET = mlc_demo
 
 # Source files for tests
-TEST_SRC = tests/test_activations.c src/core/activations.c src/core/matrix.c
+TEST_SRC = tests/test_linear_regression.c src/models/linear_regression.c src/core/matrix.c src/core/activations.c
 TEST_OBJ = $(TEST_SRC:.c=.o)
-TEST_TARGET = test_activations
+TEST_TARGET = test_linear_regression
 
 # Default build: demo
 all: $(TARGET)
