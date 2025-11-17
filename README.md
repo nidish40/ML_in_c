@@ -1,16 +1,10 @@
 # 📦 ML in C — Custom Machine Learning Framework
 
-This project is a from-scratch implementation of a **minimal machine learning framework written entirely in C**, built to understand how neural networks work internally without relying on external ML libraries.
+This project is a from-scratch implementation of a **minimal machine learning framework written in C**, designed to understand how ML models work internally without relying on external libraries.
 
-The project focuses on implementing all key components manually:
-- Matrix operations  
-- Activation functions  
-- Loss functions  
-- Neural network building blocks  
-- Gradients & backprop  
-- Training logic  
+The framework builds up from matrix operations → regression models → activation functions → loss functions → neural network components.
 
-This README documents **everything completed so far**.
+This README describes **everything completed so far**.
 
 ---
 
@@ -20,110 +14,80 @@ This README documents **everything completed so far**.
 
 ## 🧮 1. Matrix Module
 
-A custom `Matrix` struct and collection of low-level operations that serve as the foundation of all ML computations.
+A custom `Matrix` type with all the core operations required for ML calculations.
 
 ### ✔ Completed:
-- Dynamic matrix creation & deletion  
-- Matrix printing (debugging)  
-- Matrix addition  
-- Matrix subtraction  
-- Matrix multiplication (dot product)  
-- Matrix transpose  
+- Matrix creation & deletion  
+- Addition, subtraction, multiplication  
+- Transpose  
 - Element-wise operations  
-- Safety checks for shape mismatch  
+- Shape validation  
+- Debug printing  
 
-These functions power all later layers, activations, and loss functions.
+These form the foundation for all models.
 
 ---
 
-## 🔌 2. Activation Functions
+## 🧠 2. Regression Models
 
-Implemented common neural network activation functions in pure C.
+### ✔ **Linear Regression**
+- Forward pass (`y = XW + b`)  
+- MSE loss  
+- Gradient computation  
+- Training via Gradient Descent  
+
+### ✔ **Logistic Regression**
+- Sigmoid activation  
+- Binary cross-entropy loss  
+- Gradient updates  
+- Predicting probabilities & binary classes  
+
+These give you a complete understanding of classical ML models before neural networks.
+
+---
+
+## 🔌 3. Activation Functions
+
+Fully implemented activation functions used in neural networks.
 
 ### ✔ Completed:
-- **ReLU**  
-- **Sigmoid**  
-- **Tanh**  
-- **Softmax (row-wise, numerically stable)**
-
-The softmax implementation uses the standard *“subtract max trick”* to avoid overflow:
-
-\[
-\text{softmax}(x_i) = \frac{e^{x_i - \max(x)}}{\sum_j e^{x_j - \max(x)}}
-\]
+- ReLU  
+- Sigmoid  
+- Tanh  
+- Softmax (numerically stable, subtract-max trick)
 
 ---
 
-## 📉 3. Loss Functions
+## 📉 4. Loss Functions
 
-Loss functions implemented so far, including their gradients, which will be used during backpropagation.
+All loss functions also return gradients for backpropagation.
 
-### ✔ Completed:
+### ✔ **Mean Squared Error (MSE)**
+Used in regression.  
+Measures squared difference between predictions and targets.
 
-### **1. Mean Squared Error (MSE)**
-For regression-style problems.  
-Computes:
+### ✔ **Cross Entropy (from probabilities)**
+Used for classification when softmax probabilities are already computed.
 
-\[
-\text{MSE} = \frac{1}{N} \sum (p - t)^2
-\]
-
-Also returns gradient:
-
-\[
-\nabla = \frac{2(p - t)}{N}
-\]
+### ✔ **Softmax Cross Entropy (with logits)**
+Recommended version.  
+Computes softmax + cross-entropy + gradient in a single, numerically stable step.
 
 ---
 
-### **2. Cross Entropy Loss (from probabilities)**
-Used for classification when probabilities are already softmaxed.
+## 🏗️ 5. Current Project Status
 
-\[
-\text{CE} = -\sum t \log(p)
-\]
-
-Gradient:
-
-\[
-\nabla = \frac{p - t}{\text{batch}}
-\]
-
----
-
-### **3. Softmax + Cross Entropy (with logits)**
-Numerically stable version used in all real ML frameworks.
-
-Computes:
-
-1. Softmax  
-2. Cross entropy  
-3. Gradient  
-
-all in a single efficient pass.
-
-Gradient:
-
-\[
-\nabla = \frac{\text{softmax}(z) - t}{\text{batch}}
-\]
-
----
-
-## 🏗️ 4. Project Status
-
-The framework currently supports:
-
-- Core matrix math  
+So far, the following are fully functional:
+- Core matrix engine  
+- Linear regression  
+- Logistic regression  
 - Activation functions  
-- Loss functions and their gradients  
-- Testing utilities  
-- A working basis for building neural network layers
+- Loss functions + gradients  
+- Softmax & numerical stability handling  
 
-This is the complete foundation needed to start:
-
-- Implementing Dense (Fully Connected) layers  
-- Implementing backpropagation  
-- Building a complete neural network  
+The foundation is now ready for building neural network layers and backpropagation.
 
 ---
+
+
+
