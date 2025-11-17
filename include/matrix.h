@@ -23,5 +23,4 @@ Matrix* elementwise_multiply(const Matrix* a, const Matrix* b);
 Matrix* elementwise_divide(const Matrix* a, const Matrix* b);
 
 
-
 #endif
